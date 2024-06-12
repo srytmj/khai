@@ -57,7 +57,7 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">Data Bahan Baku</h5>
+                    <h5 class="card-title fw-semibold mb-4">Data Supplier</h5>
 
                     <!-- Display Error jika ada error -->
                     @if ($errors->any())
@@ -72,43 +72,56 @@
                     <!-- Akhir Display Error -->
 
                     <!-- Awal Dari Input Form -->
-                    <form action="{{ route('bahanbaku.store') }}" method="post">
+                    <form action="{{ route('supplier.store') }}" method="post">
                         @csrf
                         <fieldset disabled>
-                            <div class="mb-3"><label for="kodebahanbakulabel">Kode Bahan Baku</label>
-                                <input class="form-control form-control-solid" id="kode_bahan_baku_tampil"
-                                    name="kode_bahan_baku_tampil" type="text" placeholder="Contoh: PR-001"
-                                    value="{{ $kode_bahanbaku }}" readonly>
+                            <div class="mb-3"><label for="kodesupplierlabel">Kode Supplier</label>
+                                <input class="form-control form-control-solid" id="kode_supplier_tampil"
+                                    name="kode_supplier_tampil" type="text" placeholder="Contoh: DR-001"
+                                    value="{{ $kode_supplier }}" readonly>
                             </div>
                         </fieldset>
-                        
-                        <input type="hidden" id="kode_bahanbaku" name="kode_bahanbaku"
-                            value="{{ $kode_bahanbaku }}">
 
+                        <input type="hidden" id="kode_supplier" name="kode_supplier" value="{{ $kode_supplier }}">
 
-                        <div class="mb-3">
-                            <label for="nama_bahanbaku">Nama Bahan Baku</label>
-                            <input class="form-control" id="nama_bahanbaku" name="nama_bahanbaku" type="text"
-                                placeholder="Contoh: Beras" value="{{ old('nama_bahanbaku') }}">
-                            @error('nama_bahanbaku')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                        <div class="mb-3"><label for="namasupplierlabel">Nama Supplier</label>
+                            <input class="form-control form-control-solid" id="nama_supplier" name="nama_supplier"
+                                type="text" placeholder="Contoh: Toko Mukena Sejuk Menenangkan"
+                                value="{{ old('nama_supplier') }}">
                         </div>
 
-                        <div class="mb-3">
-                            <label for="satuan_bahanbaku">Satuan Bahan Baku</label>
-                            <input class="form-control" id="satuan_bahanbaku" name="satuan_bahanbaku" type="text"
-                                placeholder="Contoh: Kg" value="{{ old('satuan_bahanbaku') }}">
-                            @error('satuan_bahanbaku')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                        <div class="mb-3"><label for="namasupplierlabel">Nama Bahan Baku</label>
+                            <input class="form-control form-control-solid" id="nama_bahanbaku" name="nama_bahanbaku"
+                                type="text" placeholder="Contoh: Toko Mukena Sejuk Menenangkan"
+                                value="{{ old('nama_bahanbaku') }}">
                         </div>
 
-                        <!-- Tombol Simpan -->
+                        <div class="mb-3"><label for="namasupplierlabel">Kuantiti</label>
+                            <input class="form-control form-control-solid" id="kuantitas" name="kuantitas"
+                                type="number" placeholder="Contoh: Toko Mukena Sejuk Menenangkan"
+                                value="{{ old('kuantitas') }}">
+                        </div>
+
+                        <div class="mb-3"><label for="namasupplierlabel">Harga</label>
+                            <input class="form-control form-control-solid" id="harga" name="harga"
+                                type="number" placeholder="Contoh: Toko Mukena Sejuk Menenangkan"
+                                value="{{ old('harga') }}">
+                        </div>
+
+                        <input type="hidden" name="kode_bahan_baku" value="{{$bahanBaku}}">
+
+                        <div class="mb-0"><label for="alamatsupplierlabel">Alamat Supplier</label>
+                            <textarea class="form-control form-control-solid" id="alamat_supplier" name="alamat_supplier" rows="3"
+                                placeholder="Cth: Jl Pelajar Pejuan 45">{{ old('alamat_supplier') }}</textarea>
+                        </div>
+                        <br>
+                        <!-- untuk tombol simpan -->
+
                         <input class="col-sm-1 btn btn-success btn-sm" type="submit" value="Simpan">
 
-                        <!-- Tombol Batal -->
-                        <a class="col-sm-1 btn btn-dark btn-sm" href="{{ url('/') }}" role="button">Batal</a>
+                        <!-- untuk tombol batal simpan -->
+                        <a class="col-sm-1 btn btn-dark  btn-sm" href="{{ url('/supplier') }}" role="button">Batal</a>
+
                     </form>
                     <!-- Akhir Dari Input Form -->
 

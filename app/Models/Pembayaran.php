@@ -52,7 +52,7 @@ class Pembayaran extends Model
                 LEFT OUTER JOIN penjualan_detail c
                 ON (b.no_transaksi=c.no_transaksi)
                 LEFT OUTER JOIN menu d
-                ON (c.id_menu=d.id)
+                ON (c.id=d.id)
                 GROUP BY a.id,a.no_transaksi,DATE_FORMAT(a.tgl_bayar,'%Y-%m-%d'),a.tgl_konfirmasi,a.bukti_bayar,
                         a.jenis_pembayaran,a.status,
                         b.total_harga";
@@ -75,7 +75,7 @@ class Pembayaran extends Model
                 LEFT OUTER JOIN penjualan_detail c
                 ON (b.no_transaksi=c.no_transaksi)
                 LEFT OUTER JOIN menu d
-                ON (c.id_menu=d.id)
+                ON (c.id=d.id)
                 WHERE b.id_customer = ?
                 GROUP BY a.id,a.no_transaksi,a.tgl_bayar,a.tgl_konfirmasi,a.bukti_bayar,
                         a.jenis_pembayaran,a.status,

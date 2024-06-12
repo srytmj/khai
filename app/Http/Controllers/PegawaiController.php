@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePegawaiRequest;
 use App\Http\Requests\UpdatePegawaiRequest;
+use Illuminate\Support\Facades\DB;
 
 class PegawaiController extends Controller
 {
@@ -23,8 +25,8 @@ class PegawaiController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('/pegawai/create');
+    {     
+        return view('pegawai/create',['kode_pegawai' => Pegawai::getKodepegawai()]);
     }
 
     /**
@@ -32,16 +34,37 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        $masuk = $request->validate([
-            'kode_pegawai' => 'required',
-            'nama_pegawai' => 'required',
-            'jabatan' => 'required',
-            'jenis_kelamin' => 'required'
+        // Validasi data
+        $validated = $request->validate([
+            'kode_pegawai' => 'required|unique:pegawai,kode_pegawai',
+            'nama_pegawai' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'jabatan' => 'required|string|in:Manager,Kasir',
+            'no_hp' => 'required|string|max:13', // 'max:13' karena 'no_hp' di database adalah 'varchar(13)
+            'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-        Pegawai::create($masuk);
+        // Buat user baru
+        $user = User::create([
+            'name' => $validated['nama_pegawai'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+        ]);
+        
+        // Buat pegawai baru
+        Pegawai::create([
+            'kode_pegawai' => $validated['kode_pegawai'],
+            'nama_pegawai' => $validated['nama_pegawai'],
+            'alamat' => $validated['alamat'],
+            'no_hp' => $validated['no_hp'],
+            'jabatan' => $validated['jabatan'],
+            'jenis_kelamin' => $validated['jenis_kelamin'],
+            'user_id' => $user->id,
+        ]);
 
-        return redirect('/');
+        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil ditambahkan');
     }
 
     /**
@@ -86,6 +109,7 @@ class PegawaiController extends Controller
     public function destroy(Pegawai $pegawai)
     {
         Pegawai::destroy('id', $pegawai->id);
+        User::destroy('id', $pegawai->user_id);
 
         return redirect('/');
     }

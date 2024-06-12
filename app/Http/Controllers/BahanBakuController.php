@@ -2,110 +2,116 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BahanBaku;
+use App\Models\bahanbaku;
+use App\Models\Supplier;
+
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use Illuminate\Foundation\Http\FormRequest;
-use App\Http\Requests\StoreBahanBakuRequest;
-use App\Http\Requests\UpdateBahanBakuRequest;
 
-
-class BahanBakuController extends Controller
+class bahanbakuController extends Controller
 {
     /**
+     * Display a listing of the resource.
      */
+    //menampilkan data bahanbaku
     public function index()
     {
         //query data
-        
-        return view('bahanbaku/view', [
-            'bb' => BahanBaku::with('pembelian')->get()
-        ]);
+        // $bahanbaku = Supplier::all();
+        $bahanbaku = Supplier::join('bahan_baku', 'supplier.id', '=', 'bahan_baku.id')->get();
+        return view('bahanbaku.view',
+                    [
+                        'bahanbaku' => $bahanbaku
+                    ]
+                  );
     }
 
     /**
+     * Show the form for creating a new resource.
      */
     public function create()
     {
-        // berikan kode perusahaan secara otomatis
+        // berikan kode bahanbaku secara otomatis
         // 1. query dulu ke db, select max untuk mengetahui posisi terakhir 
+        //mengambil dan mengembalikan data dari bd
         
-        return view('/bahanbaku/create',
-        [
-            'kode_bahan_baku' => BahanBaku::getKodeBahanBaku(),
-            'pembelian' => BahanBaku::with('pembelian')->get()
-        ]
-        );
-        // return view('bahanbaku/view');
+        return view('bahanbaku/create',
+                    [
+                        'kode_bahanbaku' => bahanbaku::getKodebahanbaku()
+                    ]
+                  );
+
+        return view('bahanbaku/view');
     }
 
     /**
      * Store a newly created resource in storage.
-     *
      */
     public function store(Request $request)
     {
-        //digunakan untuk validasi kemudian kalau ok tidak ada masalah baru disimpan ke db
+        // Validasi data
         $validated = $request->validate([
-            'kode_bahan_baku' => 'required',
-            'nama_bahan_baku' => 'required',
-            'stock_bahan_baku' => 'required',
+            'kode_bahanbaku' => 'required|string|max:255|unique:bahan_baku,kode_bahanbaku',
+            'nama_bahanbaku' => 'required|string|max:255',
+            'satuan_bahanbaku' => 'required|string|max:255',
         ]);
 
-        // masukkan ke db
+        // Simpan data
         BahanBaku::create($validated);
-        
-        return redirect('/bahanbaku');
+
+        return redirect()->route('bahanbaku.index')->with('success', 'Bahan baku berhasil ditambahkan');
     }
 
-    /**
+    /**,.
      * Display the specified resource.
-     *
      */
-    public function show(BahanBaku $bahanbaku)
+    public function show(bahanbaku $bahanbaku)
     {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
      */
-    public function edit(BahanBaku $bahanbaku)
+    public function edit(bahanbaku $bahanbaku)
     {
-        return view('bahanbaku/edit', [
+        return view('/bahanbaku/edit', [
             'bahanbaku' => $bahanbaku
         ]);
+        // return view('bahanbaku.edit', compact('bahanbaku'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
      */
-    public function update(Request $request, BahanBaku $bahanbaku)
+    public function update(Request $request, Bahanbaku $bahanbaku)
     {
-        //digunakan untuk validasi kemudian kalau ok tidak ada masalah baru diupdate ke db
-        $validated = $request->validate([
-            'kode_bahan_baku' => 'required',
-            'nama_bahan_baku' => 'required',
-            'stock_bahan_baku' => 'required',
+        $request->validate([
+            'kode_bahanbaku' => 'required',
+            'nama_bahanbaku' => 'required',
+            'satuan_bahanbaku' => 'required',
         ]);
     
-        $bahanbaku->update($validated);
+        $empData = [
+            'kode_bahanbaku' => $request->input('kode_bahanbaku'),
+            'nama_bahanbaku' => $request->input('nama_bahanbaku'),
+            'satuan_bahanbaku' => $request->input('satuan_bahanbaku'),
+        ];
     
-        return redirect('/bahanbaku');
+        $bahanbaku->update($empData);
+    
+        return redirect()->route('bahanbaku.index')
+                        ->with('success', 'Bahanbaku updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
      */
-    // public function destroy(Perusahaan $perusahaan)
-    public function destroy($id)
+    public function destroy ($id)
     {
-        //hapus dari database
-        BahanBaku::destroy('id', $id);
+         //hapus dari database
+        $bahanbaku = bahanbaku::findOrFail($id);
+        $bahanbaku->delete();
 
-        return redirect('/bahanbaku');
+        return redirect()->route('bahanbaku.index')->with('success','Data Berhasil di Hapus');
     }
 }

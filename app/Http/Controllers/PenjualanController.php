@@ -140,15 +140,15 @@ class PenjualanController extends Controller
 
                 $id_customer = Auth::id();
                 $jml_barang = $request->input('jumlah');
-                $id_menu = $request->input('idmenuhidden');
+                $id = $request->input('idmenuhidden');
 
-                $brg = Penjualan::getMenuId($id_menu);
+                $brg = Penjualan::getMenuId($id);
                 foreach($brg as $b):
                     $harga_menu = $b->harga_menu;
                 endforeach;
 
                 $total_harga = $harga_menu*$jml_barang;
-                Penjualan::inputPenjualan($id_customer,$total_harga,$id_menu,$jml_barang,$harga_menu,$total_harga);
+                Penjualan::inputPenjualan($id_customer,$total_harga,$id,$jml_barang,$harga_menu,$total_harga);
 
                 return response()->json(
                     [

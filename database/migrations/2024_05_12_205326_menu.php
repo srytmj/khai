@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('menu', function (Blueprint $table) {
-            $table->id('id_menu');
+            $table->id();
             $table->string('kode_menu');
             $table->string('nama_menu');
             $table->integer('harga_menu');
-            $table->integer('stok');
+            $table->integer('stok')->default(0);
             $table->timestamps();
         });
 

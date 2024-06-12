@@ -12,6 +12,7 @@ use App\Http\Controllers\CobaMidtransController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,14 +59,17 @@ Route::resource('coa', CoaController::class)->middleware(['auth']);
 Route::resource('/pelanggan', App\Http\Controllers\PelangganController::class)->middleware(['auth']);
 Route::get('/pelanggan/destroy/{id}', [App\Http\Controllers\PelangganController::class,'destroy'])->middleware(['auth']);
 
-// route ke master data bahan baku
-Route::resource('/bahanbaku', BahanBakuController::class)->middleware(['auth']);
-Route::get('/bahanbaku', [App\Http\Controllers\BahanBakuController::class, 'index'])->middleware('auth');
-Route::get('/bahanbaku/destroy/{id}', [BahanBakuController::class, 'destroy'])->middleware('auth');
+// route ke master data bahanbaku 
+Route::resource('/bahanbaku', BahanbakuController::class)->middleware(['auth']);
+Route::get('/bahanbaku/destroy/{id}', [App\Http\Controllers\BahanbakuController::class,'destroy'])->middleware(['auth']);
 
 // route ke master data pegawai
 Route::resource('/pegawai', App\Http\Controllers\PegawaiController::class)->middleware(['auth']);
 Route::get('/pegawai/destroy/{id}', [App\Http\Controllers\PegawaiController::class,'destroy'])->middleware(['auth']);
+
+// route ke master data menu
+Route::resource('/menu', App\Http\Controllers\MenuController::class)->middleware(['auth']);
+Route::get('/menu/destroy/{id}', [App\Http\Controllers\MenuController::class,'destroy'])->middleware(['auth']);
 
 // untuk transaksi penjualan
 Route::get('penjualan/menu/{id}', [App\Http\Controllers\PenjualanController::class,'getDataMenu'])->middleware(['auth']);
@@ -89,8 +93,6 @@ Route::get('pembayaran/unapprove/{no_transaksi}', [App\Http\Controllers\Pembayar
 Route::get('pembayaran/viewstatusPG', [App\Http\Controllers\PembayaranController::class, 'viewstatusPG'])->middleware(['auth']);
 Route::resource('pembayaran', App\Http\Controllers\PembayaranController::class)->middleware(['auth']);
 
-Route::resource('menu', MenuController::class)->middleware(['auth']);
-Route::get('/menu/destroy/{id}', [MenuController::class,'destroy'])->middleware(['auth']);
 
 // untuk midtrans
 Route::get('midtrans', [App\Http\Controllers\CobaMidtransController::class,'index'])->middleware(['auth']);
@@ -108,5 +110,10 @@ Route::get('jurnal/viewdatabukubesar/{periode}/{akun}', [App\Http\Controllers\Ju
 // untuk api
 Route::get('api1', [App\Http\Controllers\ApiController::class,'getNews'])->middleware(['auth']);
 Route::get('api2', [App\Http\Controllers\ApiController::class,'getWiki'])->middleware(['auth']);
+
+// route ke master data supplier
+Route::get('/supplier', [SupplierController::class, 'index']);
+Route::get('/supplier/destroy/{id}', [SupplierController::class,'destroy'])->middleware(['auth']);
+Route::resource('/supplier', SupplierController::class)->middleware(['auth']);
 
 require __DIR__.'/auth.php';

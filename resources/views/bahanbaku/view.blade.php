@@ -56,12 +56,12 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-md-12">
-                  <h5 class="card-title fw-semibold mb-4">Coa</h5>
+                  <h5 class="card-title fw-semibold mb-4">Bahan Baku</h5>
                   <div class="card">
 
                         <!-- Card Header - Dropdown -->
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Master Data Coa</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Master Data Bahan Baku</h6>
                             
                             <!-- Tombol Tambah Data -->
                             <a href="{{ url('/bahanbaku/create') }}" class="btn btn-primary btn-icon-split btn-sm">
@@ -81,29 +81,32 @@
                                   <thead class="thead-dark">
                                       <tr>
                                           <th>Kode Barang</th>
-                                          <th>Kode Pembelian</th>
+                                          <th>Supplier</th>
                                           <th>Nama Bahan Baku</th>
-                                          <th>Jumlah Kuantiti</th>
-                                          <th>Harga</th>
+                                          <th>Stok</th>
+                                          <th>Harga Satuan</th>
+                                          <th>Total</th>
                                       </tr>
                                   </thead>
                                   <tfoot class="thead-dark">
                                       <tr>
                                           <th>Kode Barang</th>
-                                          <th>Kode Pembelian</th>
+                                          <th>Supplier</th>
                                           <th>Nama Bahan Baku</th>
-                                          <th>Jumlah Kuantiti</th>
-                                          <th>Harga</th>
+                                          <th>Stok</th>
+                                          <th>Harga Satuan</th>
+                                          <th>Total</th>
                                       </tr>
                                   </tfoot>
                                   <tbody>
-                                      @foreach ($bb as $p)
+                                      @foreach ($bahanbaku as $p)
                                           <tr>
-                                              <td>{{ $p->kode_barang }}</td>
-                                              <td>{{ $p->kode_pembelian }}</td>
-                                              <td>{{ $p->nama_bahan_baku }}</td>
-                                              <td>{{ $p->jumlah }}</td>
-                                              <td>Rp. {{ number_format($p->nominal,0 ,','.',') }}</td>
+                                              <td>{{ $p->kode_bahanbaku }}</td>
+                                              <td>{{ $p->nama_supplier }}</td>
+                                              <td>{{ $p->nama_bahanbaku }}</td>
+                                              <td>{{ $p->kuantitas }}</td>
+                                              <td>{{ rupiah($p->harga) }}</td>
+                                              <td>{{ rupiah($p->kuantitas * $p->harga) }}</td>
                                           </tr>
                                       @endforeach
                                   </tbody>

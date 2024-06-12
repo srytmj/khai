@@ -51,8 +51,9 @@ class MenuController extends Controller
 
     public function edit(Menu $menu)
     {
-        return view('menu/edit' , compact('menu'));
-        
+        return view('/menu/edit', [
+            'menu' => $menu
+        ]);
     }
 
 

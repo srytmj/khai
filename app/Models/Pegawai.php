@@ -12,13 +12,14 @@ class Pegawai extends Model
     use HasFactory;
     protected $table = 'pegawai';
     // list kolom yang bisa diisi
-    protected $fillable = ['kode_pegawai','nama_pegawai','jabatan','jenis_kelamin'];
+
+    protected $fillable = ['kode_pegawai','nama_pegawai','alamat','jabatan','no_hp','jenis_kelamin','user_id','email', 'password'];
 
     // query nilai max dari kode pegawai untuk generate otomatis kode pegawai
-   static public function getKodepegawai()
+    public static function getKodepegawai()
     {
         // query kode pegawai
-        $sql = "SELECT IFNULL(MAX(kode_pegawai), 'PL-000') as kode_pegawai 
+        $sql = "SELECT IFNULL(MAX(kode_pegawai), 'PGW-000') as kode_pegawai 
                 FROM pegawai";
         $kodepegawai = DB::select($sql);
 
@@ -31,11 +32,15 @@ class Pegawai extends Model
         $noakhir = $noawal+1; //menambahkan 1, hasilnya adalah integer cth 1
         
         //menyambung dengan string PR-001
-        $noakhir = 'PL-'.str_pad($noakhir,3,"0",STR_PAD_LEFT); 
+        $noakhir = 'PGW-'.str_pad($noakhir,3,"0",STR_PAD_LEFT); 
 
         return $noakhir;
 
     }
 
-    
+    // Relasi ke model User
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

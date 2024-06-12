@@ -15,19 +15,17 @@ class BahanBaku extends Model
 
     protected $guarded = ['id'];
 
-    protected $with = 'pembelian';
-
     // query nilai max dari kode perusahaan untuk generate otomatis kode perusahaan
     public static function getKodeBahanBaku()
     {
         // query kode perusahaan
-        $sql = "SELECT IFNULL(MAX(kode_barang), 'BB-000') as kode_barang 
+        $sql = "SELECT IFNULL(MAX(kode_bahanbaku), 'BB-000') as kode_bahanbaku 
                 FROM bahan_baku";
-        $kode_barang = DB::select($sql);
+        $kode_bahanbaku = DB::select($sql);
 
         // cacah hasilnya
-        foreach ($kode_barang as $kdbhnbk) {
-            $kd = $kdbhnbk->kode_barang;
+        foreach ($kode_bahanbaku as $kdbhnbk) {
+            $kd = $kdbhnbk->kode_bahanbaku;
         }
         // Mengambil substring tiga digit akhir dari string PR-000
         $noawal = substr($kd, -3);
@@ -37,10 +35,5 @@ class BahanBaku extends Model
         $noakhir = 'BB-' . str_pad($noakhir, 3, "0", STR_PAD_LEFT);
 
         return $noakhir;
-    }
-
-    public function pembelian()
-    {
-        return $this->belongsTo(pembelian::class, 'kode_pembelian');
     }
 }

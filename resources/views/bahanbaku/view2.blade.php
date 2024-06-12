@@ -166,7 +166,7 @@
                         <div class="col-sm-8">
                             <select class="form-control" aria-label="Default select example" id="kode_bahan_baku" name="kode_bahan_baku">
                                 @foreach ($bb as $p)
-                                    <option value="{{$p->id}}">{{$p->nama_bahan_baku}}</option>
+                                    <option value="{{$p->id}}">{{$p->nama_bahanbaku}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback errorid_bahanbaku"></div>
@@ -183,7 +183,7 @@
                 <div class="mb-3 row">
                     <label for="lantailabel" class="col-sm-4 col-form-label">Nama Bahan Baku</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="nama_bahan_baku" name="nama_bahan_baku" placeholder="Masukkan Nama Bahan Baku, cth: Kas">
+                        <input type="text" class="form-control" id="nama_bahanbaku" name="nama_bahanbaku" placeholder="Masukkan Nama Bahan Baku, cth: Kas">
                         <div class="invalid-feedback errornama_bahan_baku"></div>
                     </div>
                 </div>
@@ -221,7 +221,7 @@
 
               // kosongkan isi dari input form
               $('#kode_bahan_baku').val('');
-              $('#nama_bahan_baku').val('');
+              $('#nama_bahanbaku').val('');
               $('#stock_bahan_baku').val('');
               $('#idbahanbakuhidden').val('');
               $('#tipeproses').val('tambah'); //untuk identifikasi di controller apakah tambah atau update
@@ -229,7 +229,7 @@
 
                 var data = {
                     'kode_bahan_baku': $('.kode_bahan_baku').val(),
-                    'nama_bahan_baku': $('.nama_bahan_baku').val(),
+                    'nama_bahanbaku': $('.nama_bahanbaku').val(),
                     'stock_bahan_baku': $('.stock_bahan_baku').val(),
                 }  
 
@@ -260,11 +260,11 @@
                                 $('.errorkode_bahan_baku').html();
                             }
 
-                            if(response.errors.nama_bahan_baku){
-                                $('#nama_bahan_baku').removeClass('is-valid').addClass('is-invalid');
-                                $('.errornama_bahan_baku').html(response.errors.nama_bahan_baku);
+                            if(response.errors.nama_bahanbaku){
+                                $('#nama_bahanbaku').removeClass('is-valid').addClass('is-invalid');
+                                $('.errornama_bahan_baku').html(response.errors.nama_bahanbaku);
                             }else{
-                                $('#nama_bahan_baku').removeClass('is-valid').removeClass('is-invalid').addClass('is-valid');
+                                $('#nama_bahanbaku').removeClass('is-valid').removeClass('is-invalid').addClass('is-valid');
                                 $('.errornama_bahan_baku').html();
                             }
 
@@ -335,14 +335,14 @@
                 } else {
                     // console.log(response.coa.kode_akun);
                     $('#kode_bahan_baku').val(response.bahanbaku.kode_bahan_baku);
-                    $('#nama_bahan_baku').val(response.bahanbaku.nama_bahan_baku);
+                    $('#nama_bahanbaku').val(response.bahanbaku.nama_bahanbaku);
                     $('#stock_bahan_baku').val(response.bahanbaku.stock_bahan_baku);
                     $('#idbahanbakuhidden').val(id)
 
                     // pastikan form is-invalid dikembalikan ke valid
                     $('#kode_bahan_baku').removeClass('is-invalid').addClass('is-valid');;
                     $('.errorkode_bahan_baku').html();
-                    $('#nama_bahan_baku').removeClass('is-invalid').addClass('is-valid');;
+                    $('#nama_bahanbaku').removeClass('is-invalid').addClass('is-valid');;
                     $('.errornama_bahan_baku').html();
                     $('.#stock_bahan_bakuu').removeClass('is-invalid').addClass('is-valid');;
                     $('.errorstock_bahan_baku').html();
@@ -409,11 +409,11 @@
                                                 $('.errorkode_bahan_baku').html();
                                             }
 
-                                            if(response.errors.nama_bahan_baku){
-                                                $('#nama_bahan_baku').removeClass('is-valid').addClass('is-invalid');
-                                                $('.errornama_bahan_baku').html(response.errors.nama_bahan_baku);
+                                            if(response.errors.nama_bahanbaku){
+                                                $('#nama_bahanbaku').removeClass('is-valid').addClass('is-invalid');
+                                                $('.errornama_bahan_baku').html(response.errors.nama_bahanbaku);
                                             }else{
-                                                $('#nama_bahan_baku').removeClass('is-invalid').addClass('is-valid');;
+                                                $('#nama_bahanbaku').removeClass('is-invalid').addClass('is-valid');;
                                                 $('.errornama_bahan_baku').html();
                                             }
 

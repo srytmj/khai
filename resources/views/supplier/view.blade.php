@@ -56,19 +56,19 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-md-12">
-                  <h5 class="card-title fw-semibold mb-4">Pegawai</h5>
+                  <h5 class="card-title fw-semibold mb-4">Supplier</h5>
                   <div class="card">
 
                         <!-- Card Header - Dropdown -->
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Master Data pegawai</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Master Data Supplier</h6>
                             
                             <!-- Tombol Tambah Data -->
-                            <a href="{{ url('/pegawai/create') }}" class="btn btn-primary btn-icon-split btn-sm">
+                            <a href="{{ url('/supplier/create') }}" class="btn btn-primary btn-icon-split btn-sm">
                                 <span class="icon text-white-50">
                                     <i class="ti ti-plus"></i>
                                 </span>
-                                <span class="text">Tambah Data pegawai</span>
+                                <span class="text">Tambah Data</span>
                             </a>
                             <!-- Akghir Tombol Tambah Data -->
 
@@ -80,37 +80,28 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th>No</th>
-                                            <th>Nama Pegawai</th>
+                                            <th>Kode</th>
+                                            <th>Nama</th>
                                             <th>Alamat</th>
-                                            <th>Jabatan</th>
-                                            <th>Nama User</th>
-                                            <th>Email User</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot class="thead-dark">
                                         <tr>
-                                            <th>No</th>
-                                            <th>Nama Pegawai</th>
+                                            <th>Kode</th>
+                                            <th>Nama</th>
                                             <th>Alamat</th>
-                                            <th>Jabatan</th>
-                                            <th>Nama User</th>
-                                            <th>Email User</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach ($pegawai as $p)
+                                    @foreach ($supplier as $p)
                                         <tr>
-                                          <td>{{ $p->id }}</td>
-                                          <td>{{ $p->nama_pegawai }}</td>
-                                          <td>{{ $p->alamat }}</td>
-                                          <td>{{ $p->jabatan }}</td>
-                                          <td>{{ $p->user->name }}</td>
-                                          <td>{{ $p->user->email }}</td>
+                                            <td>{{ $p->kode_supplier }}</td>
+                                            <td>{{ $p->nama_supplier }}</td>
+                                            <td>{{ $p->alamat_supplier }}</td>
                                             <td>
-                                                    <a href="{{ route('pegawai.edit', $p->id) }}" class="btn btn-success btn-icon-split btn-sm">
+                                                    <a href="{{ route('supplier.edit', $p->id) }}" class="btn btn-success btn-icon-split btn-sm">
                                                         <span class="icon text-white-50">
                                                             <i class="ti ti-check"></i>
                                                         </span>
@@ -148,12 +139,12 @@
                 id = e.getAttribute('data-id');
 
                 // const str = 'Hello' + id + 'World';
-                var url3 = "{{url('pegawai/destroy/')}}";
+                var url3 = "{{url('supplier/destroy/')}}";
                 var url4 = url3.concat("/",id);
                 // console.log(url4);
 
                 // console.log(id);
-                // var url = "{{url('pegawai/destroy/"+id+"')}}";
+                // var url = "{{url('supplier/destroy/"+id+"')}}";
                 
                 // url = JSON.parse(rul.replace(/"/g,'"'));
                 tomboldelete.setAttribute("href", url4); //akan meload kontroller delete
@@ -182,7 +173,7 @@
                 </div>
                 <div class="modal-body" id="xid"></div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Tidak</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                     <a id="btn-delete" class="btn btn-danger" href="#">Hapus</a>
                     
                 </div>
