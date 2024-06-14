@@ -23,30 +23,30 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::table('penjualan')->insert([
-            [
-                'id' => 5,
-                'no_transaksi' => 'FK-0001',
-                'id_customer' => 4,
-                'tgl_transaksi' => '2024-06-10 17:08:03',
-                'tgl_expired' => '2024-06-13 17:08:03',
-                'total_harga' => 5000,
-                'status' => 'selesai',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'id' => 6,
-                'no_transaksi' => 'FK-0002',
-                'id_customer' => 4,
-                'tgl_transaksi' => '2024-06-10 23:10:29',
-                'tgl_expired' => '2024-06-13 23:10:29',
-                'total_harga' => 2000,
-                'status' => 'selesai',
-                'created_at' => now(),
-                'updated_at' => now()
-            ]
-        ]);
+        // DB::table('penjualan')->insert([
+        //     [
+        //         'id' => 1,
+        //         'no_transaksi' => 'FK-0001',
+        //         'id_customer' => 1,
+        //         'tgl_transaksi' => '2024-06-10 17:08:03',
+        //         'tgl_expired' => '2024-06-13 17:08:03',
+        //         'total_harga' => 5000,
+        //         'status' => 'selesai',
+        //         'created_at' => now(),
+        //         'updated_at' => now()
+        //     ],
+        //     [
+        //         'id' => 2,
+        //         'no_transaksi' => 'FK-0002',
+        //         'id_customer' => 1,
+        //         'tgl_transaksi' => '2024-06-10 23:10:29',
+        //         'tgl_expired' => '2024-06-13 23:10:29',
+        //         'total_harga' => 2000,
+        //         'status' => 'selesai',
+        //         'created_at' => now(),
+        //         'updated_at' => now()
+        //     ]
+        // ]);
 
         Schema::create('penjualan_detail', function (Blueprint $table) {
             $table->id();
@@ -60,32 +60,32 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::table('penjualan_detail')->insert([
-            [
-                'id' => 45,
-                'no_transaksi' => 'FK-0001',
-                'id_menu' => 1,
-                'harga_menu' => 1000,
-                'jml_barang' => 5,
-                'total' => 5000,
-                'tgl_transaksi' => '2024-06-10 17:08:03',
-                'tgl_expired' => '2024-06-13 17:08:03',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'id' => 46,
-                'no_transaksi' => 'FK-0002',
-                'id_menu' => 1,
-                'harga_menu' => 1000,
-                'jml_barang' => 2,
-                'total' => 2000,
-                'tgl_transaksi' => '2024-06-10 23:10:29',
-                'tgl_expired' => '2024-06-13 23:10:29',
-                'created_at' => now(),
-                'updated_at' => now()
-            ]
-        ]);
+        // DB::table('penjualan_detail')->insert([
+        //     [
+        //         'id' => 1,
+        //         'no_transaksi' => 'FK-0001',
+        //         'id_menu' => 1,
+        //         'harga_menu' => 1000,
+        //         'jml_barang' => 5,
+        //         'total' => 5000,
+        //         'tgl_transaksi' => '2024-06-10 17:08:03',
+        //         'tgl_expired' => '2024-06-13 17:08:03',
+        //         'created_at' => now(),
+        //         'updated_at' => now()
+        //     ],
+        //     [
+        //         'id' => 2,
+        //         'no_transaksi' => 'FK-0002',
+        //         'id_menu' => 1,
+        //         'harga_menu' => 1000,
+        //         'jml_barang' => 2,
+        //         'total' => 2000,
+        //         'tgl_transaksi' => '2024-06-10 23:10:29',
+        //         'tgl_expired' => '2024-06-13 23:10:29',
+        //         'created_at' => now(),
+        //         'updated_at' => now()
+        //     ]
+        // ]);
     }
 
     /**

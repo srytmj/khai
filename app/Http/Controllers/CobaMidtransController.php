@@ -247,7 +247,34 @@ class CobaMidtransController extends Controller
         $payment_type = $json->payment_type;
         $status_code = $json->status_code;
         DB::insert('insert into pg_penjualan (id_penjualan, order_id, gross_amount, transaction_id, payment_type, status_code) values (?, ?, ?, ?, ?, ?)', [$id_penjualan, $order_id, $gross_amount, $transaction_id, $payment_type, $status_code]);
+        
+        // query dapatkan nilai nominal transaksi
+        $data_penjualan = DB::table('penjualan')->where('id', $id_penjualan)->first();
+        $data_pgpenjualan = DB::table('pg_penjualan')->where('id_penjualan', $id_penjualan)->first();
 
+        //catat ke jurnal
+        DB::table('jurnal')->insert([
+            'id_transaksi' => $data_pgpenjualan->id_penjualan,
+            'id_perusahaan' => 1, //bisa diganti kalau sudah live
+            'kode_akun' => '111',
+            'tgl_jurnal' => now(),
+            'posisi_d_c' => 'd',
+            'nominal' => $data_penjualan->total_harga,
+            'kelompok' => 1,
+            'transaksi' => 'penjualan',
+        ]);
+
+        DB::table('jurnal')->insert([
+            'id_transaksi' => $data_pgpenjualan->id_penjualan,
+            'id_perusahaan' => 1, //bisa diganti kalau sudah live
+            'kode_akun' => '411',
+            'tgl_jurnal' => now(),
+            'posisi_d_c' => 'c',
+            'nominal' => $data_penjualan->total_harga,
+            'kelompok' => 4,
+            'transaksi' => 'penjualan',
+        ]);
+        
         return redirect('midtrans/status');
     }
 }

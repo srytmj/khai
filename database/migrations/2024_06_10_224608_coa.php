@@ -35,7 +35,14 @@ return new class extends Migration
                 'header_akun' => '4',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
+            [
+                'kode_akun' => '501',
+                'nama_akun' => 'Beban Gaji',
+                'header_akun' => '5',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 

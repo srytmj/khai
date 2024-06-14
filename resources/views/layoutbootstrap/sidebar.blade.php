@@ -89,6 +89,14 @@
                             <span class="hide-menu">Transaksi</span>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{ route('gaji.index') }}" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-logout"></i>
+                                </span>
+                                <span class="hide-menu">Penggajian</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('penjualan.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-login"></i>

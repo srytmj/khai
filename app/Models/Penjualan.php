@@ -181,7 +181,7 @@ class Penjualan extends Model
             // masukkan ke tabel detail_penjualan
             DB::table('penjualan_detail')->insert([
                 'no_transaksi' => $faktur,
-                'id' => $id,
+                'id_menu' => $id,
                 'harga_menu' => $harga_menu,
                 'jml_barang' => $jml_barang,
                 'total' => $total,
@@ -287,7 +287,7 @@ class Penjualan extends Model
                 // masukkan ke tabel detail_penjualan
                 DB::table('penjualan_detail')->insert([
                     'no_transaksi' => $faktur,
-                    'id' => $id,
+                    'id_menu' => $id,
                     'harga_menu' => $harga_menu,
                     'jml_barang' => $jml_barang,
                     'total' => $total,
@@ -393,7 +393,7 @@ class Penjualan extends Model
                     // masukkan ke tabel detail_penjualan
                     DB::table('penjualan_detail')->insert([
                         'no_transaksi' => $no_transaksi,
-                        'id' => $id,
+                        'id_menu' => $id,
                         'harga_menu' => $harga_menu,
                         'jml_barang' => $jml_barang,
                         'total' => $total,
@@ -431,7 +431,7 @@ class Penjualan extends Model
                 JOIN penjualan_detail b
                 ON (a.no_transaksi=b.no_transaksi)
                 JOIN menu c
-                ON (b.id = c.id)
+                ON (b.id_menu = c.id)
                 WHERE a.id_customer = ? AND a.status
                 not in ('selesai','expired','siap_bayar','konfirmasi_bayar')";
         $menu = DB::select($sql,[$id_customer]);

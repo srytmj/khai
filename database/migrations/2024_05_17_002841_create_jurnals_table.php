@@ -24,36 +24,6 @@ return new class extends Migration
             $table->string('transaksi');
             $table->timestamps();
         });
-
-        // Insert some data
-        DB::table('jurnal')->insert(
-            [
-                [
-                    'id_transaksi' => 1,
-                    'id_perusahaan' => 1,
-                    'kode_akun' => '111',
-                    'tgl_jurnal' => '2024-05-17 00:00:00',
-                    'posisi_d_c' => 'd',
-                    'nominal' => 1000000,
-                    'kelompok' => '1',
-                    'transaksi' => 'penjualan',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
-                [
-                    'id_transaksi' => 2,
-                    'id_perusahaan' => 1,
-                    'kode_akun' => '411',
-                    'tgl_jurnal' => '2024-05-17 00:00:00',
-                    'posisi_d_c' => 'c',
-                    'nominal' => 1000000,
-                    'kelompok' => '1',
-                    'transaksi' => 'penjualan',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]
-            ]
-        );
     }
 
     /**

@@ -116,4 +116,9 @@ Route::get('/supplier', [SupplierController::class, 'index']);
 Route::get('/supplier/destroy/{id}', [SupplierController::class,'destroy'])->middleware(['auth']);
 Route::resource('/supplier', SupplierController::class)->middleware(['auth']);
 
+// untuk gaji
+Route::get('/gaji', [App\Http\Controllers\GajiController::class, 'index'])->middleware('auth');
+Route::resource('/gaji', App\Http\Controllers\GajiController::class)->middleware('auth');
+Route::get('/gaji/destroy/{id}', [App\Http\Controllers\GajiController::class, 'destroy'])->middleware('auth');
+
 require __DIR__.'/auth.php';

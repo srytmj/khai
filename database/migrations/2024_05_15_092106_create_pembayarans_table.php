@@ -34,16 +34,6 @@ return new class extends Migration
                 'created_at' => '2024-06-10 10:11:53',
                 'updated_at' => '2024-06-10 10:11:53'
             ],
-            [
-                'no_transaksi' => 'FK-0002',
-                'tgl_bayar' => '2024-06-10 23:11:30',
-                'tgl_konfirmasi' => '2024-06-10 23:11:50',
-                'bukti_bayar' => 'midtrans-logo.png',
-                'jenis_pembayaran' => 'pg',
-                'status' => 'approved',
-                'created_at' => '2024-06-10 16:11:50',
-                'updated_at' => '2024-06-10 16:11:50'
-            ]
         ]);
     }
 

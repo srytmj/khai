@@ -36,35 +36,22 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Insert initial data
-        DB::table('pg_penjualan')->insert([
-            [
-                'id_penjualan' => 5,
-                'transaction_time' => '2024-06-10 17:11:42',
-                'gross_amount' => '5000.00',
-                'order_id' => '1818905480',
-                'payment_type' => 'bank_transfer',
-                'status_code' => '200',
-                'transaction_id' => '8ec09962-fc0b-4f13-83aa-5724d955a0f5',
-                'transaction_status' => 'settlement',
-                'settlement_time' => '2024-06-10 17:11:52',
-                'status_message' => 'Success, transaction is found',
-                'merchant_id' => 'G913881209'
-            ],
-            [
-                'id_penjualan' => 6,
-                'transaction_time' => '2024-06-10 23:11:30',
-                'gross_amount' => '2000.00',
-                'order_id' => '1218179952',
-                'payment_type' => 'bank_transfer',
-                'status_code' => '200',
-                'transaction_id' => 'f4483d0d-b709-43cb-b649-b1a9419aa1d1',
-                'transaction_status' => 'settlement',
-                'settlement_time' => '2024-06-10 23:11:47',
-                'status_message' => 'Success, transaction is found',
-                'merchant_id' => 'G913881209'
-            ]
-        ]);
+        // // Insert initial data
+        // DB::table('pg_penjualan')->insert([
+        //     [
+        //         'id_penjualan' => 1,
+        //         'transaction_time' => '2024-06-10 17:11:42',
+        //         'gross_amount' => '5000.00',
+        //         'order_id' => '1818905480',
+        //         'payment_type' => 'bank_transfer',
+        //         'status_code' => '200',
+        //         'transaction_id' => '8ec09962-fc0b-4f13-83aa-5724d955a0f5',
+        //         'transaction_status' => 'settlement',
+        //         'settlement_time' => '2024-06-10 17:11:52',
+        //         'status_message' => 'Success, transaction is found',
+        //         'merchant_id' => 'G913881209'
+        //     ],
+        // ]);
     }
 
     /**
